@@ -1,9 +1,14 @@
-def jukebox(command)
-  if command.downcase == "list"
-    list_library
-  else
-    parse_command(command)
-  end
+require_relative './song_library.rb'
+require 'pry'
+
+def list_artist(artist, album_hash)
+   artist_list = "\n-------------------------\n #{artist}:\n-------------------------"
+   album_hash[:albums].each do |album_name, songs_hash|
+    #  binding.pry
+     artist_list += "\n#{album_name}:\n\t"
+     artist_list += songs_hash[:songs].join("\n\t")
+   end
+   artist_list
 end
 
 def list_library
@@ -17,8 +22,9 @@ def parse_command(command)
   parse_artist(command, full_library) || play_song(command, full_library) || not_found(command)
 end
 
+# Searches for song by artist
 def parse_artist(command, lib)
-  cmd = command.to_sym
+  cmd = command.capitalize
   parsed = false
   if lib.has_key?(cmd)
     puts list_artist(command, lib[cmd])
@@ -39,10 +45,10 @@ def play_song(command, lib)
   lib.each do |artist, hash|
     hash.each do |album_name, albums_hash|
       albums_hash.each do |album, songs_hash|
-        songs_hash.each do |songs|
-          songs.each do |song|
+        songs_hash.each do |key, songs_array|
+          songs_array.each do |song|
             if song.downcase == command.downcase
-            puts "Now Playing: #{artist[command].strip}: #{album} - #{song}\n\n"
+            puts "Now Playing: #{artist[command]}: #{album} - #{song}\n\n"
             return true
           end
         end
@@ -52,19 +58,22 @@ def play_song(command, lib)
   false
 end
 
-def list_artist(artist, album_hash)
-   artist_list = "\n---------------\n"
-   artist_list += "#{artist}:\n"
-   artist_list += "---------------"
-   album_hash[:albums].each do |album_name, songs_hash|
-     artist_list += "\n#{album_name}:\n\t"
-     artist_list += songs_hash[:songs].join("\n\t")
-   end
-   artist_list
-end
-
 def not_found(command)
   puts "I did not understand '#{command}'!\n\n"
   true
 end
 end
+
+def jukebox(command)
+  if command.downcase == "list"
+    # binding.pry
+    list_library
+  else
+    # binding.pry
+    parse_command(command)
+  end
+end
+
+# Write a begin/ rescue wit pry to handle erros, and see where the issue is at
+# use .nil? method to check what is nil and where
+# check a method if something is nil

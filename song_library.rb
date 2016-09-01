@@ -1,28 +1,28 @@
 def full_library
   {
-    :"U2" => {
+    "U2" => {
       :albums => {
-        :"The Joshua Tree" => {
+        "The Joshua Tree" => {
           :songs => ["With or Without You", "Still Haven't Found What I'm Looking For", "Bullet the Blue Sky"]
         },
-        :"Zooropa" =>
+        "Zooropa" => {
           :songs => ["Numb"]
         }
        }
     },
-    :"Talking Heads" => {
+    "Talking Heads" => {
       :albums => {
-        :"Fear of Music" => {
+        "Fear of Music" => {
           :songs => ["Life During Wartime", "Heaven"]
         },
-        :"Speaking in Tongues" => {
+        "Speaking in Tongues" => {
           :songs => ["This Must Be the Place (Naive Melody)", "Burning Down the House"]
         }
       }
     },
-    :"Huey Lewis and the News" => {
+    "Huey Lewis and the News" => {
       :albums => {
-        :"Sports" => {
+        "Sports" => {
           :songs => ["I Want a New Drug", "If This is It", "Heart of Rock and Roll"]
         }
       }
